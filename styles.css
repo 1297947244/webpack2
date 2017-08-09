@@ -1,0 +1,12 @@
+ul li {
+    display: inline-block;
+}
+li a {
+    display: inline-block;
+    padding: 16px;
+    color: #808080;
+    
+}
+li .statics-app_active--3E6H7Wix {
+    color: #29e;
+}
