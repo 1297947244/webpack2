@@ -1,0 +1,19 @@
+.nav li {
+    display: inline-block;
+    height: 42px;
+    line-height: 42px;
+}
+li {
+    a {
+        display: inline-block;
+        padding: 0 16px;
+        color: #808080;
+        text-decoration: none;
+        &:hover {
+            color: #29e;
+        }
+        &.active {
+            color: #29e;
+        }
+    }
+}

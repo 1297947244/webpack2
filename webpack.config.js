@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         app: './index',
+        //vendor: ['jquery']
     },
     output: {
         path: __dirname + '/',
@@ -13,7 +14,10 @@ module.exports = {
     },
     resolve: {
         // modules: [path.join(__dirname, './'), 'node_modules'],
-        extensions: ['.js', '.jsx', '.scss', '.css']
+        extensions: ['.js', '.jsx', '.scss', '.css'],
+        // alias: {
+        //     jquery: 'jquery/dist/jquery.min.js'
+        // }
     },
     module: {
         rules: [
@@ -30,42 +34,46 @@ module.exports = {
                     ]
                 }
             },
-            {
-                test: /\.(css|scss)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: true,
-                                localIdentName: '[local]',
-                            },
-                        }
-                    ]
-                }),
+            // {//抽取css
+            //     test: /\.css$/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: [
+            //             {
+            //                 loader: 'css-loader',
+            //                 options: {
+            //                     modules: true,
+            //                     localIdentName: '[local]',
+            //                 },
+            //             }
+            //         ]
+            //     }),
+            // },
+            {//scss转成css，并抽取出来
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: "style-loader",
+                    loader: "css-loader!sass-loader"
+                })
             },
-            //转换scss成css，并插入到head中
-            // {  
-            //     test: /\.(css|scss)$/,  
-            //     loader:"style-loader!css-loader!sass-loader"  
-            // }  
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_console: false,
-            }
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false,
+        //         drop_console: false,
+        //     }
+        // }),
         new ExtractTextPlugin("styles.css"),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, 'index.html'),
-            // chunks: ['index'],
-            inject: 'body',
-            // staticPath: staticPath
+            inject: 'body'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'commons',
+            filename: 'commons.js'
         })
     ]
 };

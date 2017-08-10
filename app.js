@@ -4,7 +4,7 @@ import Nav from './apps/Nav';
 import Root from './apps/Root';
 import Repos from './apps/Repos';
 import About from './apps/About'
-import './statics/app.css';
+import './statics/index.scss';
 
 export default class App extends Component {
 

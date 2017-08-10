@@ -1,12 +1,18 @@
-ul li {
+.container {
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.nav li {
     display: inline-block;
+    height: 42px;
+    line-height: 42px;
 }
 li a {
     display: inline-block;
-    padding: 16px;
+    padding: 0 16px;
     color: #808080;
-    
+    text-decoration: none;
 }
-li .statics-app_active--3E6H7Wix {
+li .active {
     color: #29e;
 }
